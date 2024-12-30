@@ -28,9 +28,9 @@ First, you will need to export the messages from your Discord server to store th
 You can either use your existing MongoDB instance or get one by using the [docker-compose.yml](./docker-compose.yml) file.
 
 > [!IMPORTANT]  
->Don't forget to set the required environment variables in the [.env](./msg_export/src/.env) file.  
->You will need the ID of the channel you want to export the messages from.  
->You can get it by right-clicking on the channel and selecting "Copy ID" in Discord (you will need to enable Developer Mode in the settings).
+> Don't forget to set the required environment variables in the [.env](./msg_export/src/.env) file.  
+> You will need the ID of the channel you want to export the messages from.  
+> You can get it by right-clicking on the channel and selecting "Copy ID" in Discord (you will need to enable Developer Mode in the settings).
 
 ### Using Docker
 
@@ -59,5 +59,11 @@ $ npm install
 $ npm start
 ```
 </details>
+
+> [!INFO]
+> The extraction process can take a while depending on the number of messages in the channel.  
+> You can keep track of the progress by checking the logs.  
+> If the process is interrupted, you can restart it and it will continue from where it left off.
+> Once the process is done, you can move on to the next step.
 
 ## TODO
