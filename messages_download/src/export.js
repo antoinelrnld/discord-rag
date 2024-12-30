@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const { token, channelId, mongodb } = require('./config.json');
+const { token, channelId, mongodb } = require('./config.js');
 const { Client, GatewayIntentBits } = require('discord.js');
 
 const MAX_FETCH_LIMIT = 100;
@@ -21,6 +21,7 @@ const fetchAndStoreMessages = async (channelId) => {
         const channel = await client.channels.fetch(channelId);
         let latestStoredMessageId = await getLatestStoredMessageId();
         let messagesCollection = null;
+        let messagesProcessed = 0;
 
         await mongoClient.connect();
         
@@ -31,10 +32,10 @@ const fetchAndStoreMessages = async (channelId) => {
                 const sortedMessages = messages.sort((a, b) => a.timestamp - b.timestamp);
                 await storeMessages(sortedMessages);
                 latestStoredMessageId = sortedMessages[sortedMessages.length - 1]._id;
+                console.info(`Messages processed: ${messagesProcessed += messages.length}`);
             }
         } while (messagesCollection.size === MAX_FETCH_LIMIT);
-
-        console.log('Messages downloaded and stored successfully');
+        console.info(`Successfully exported ${messagesProcessed} messages.`);
     } catch (error) {
         console.error(error);
     } finally {
