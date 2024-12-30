@@ -12,8 +12,8 @@ To get started, you will need to get through the following steps:
 2. [Export your Discord messages](#export-your-discord-messages)
 3. [To do](#todo)
 
-[!WARNING]  
-Keep in mind that the project is in its early stages and is only a prototype for now.
+> [!WARNING]  
+> Keep in mind that the project is in its early stages and is only a prototype for now.
 
 ## 1. Prerequisites
 
@@ -28,10 +28,10 @@ Keep in mind that the project is in its early stages and is only a prototype for
 First, you will need to export the messages from your Discord server to store them elsewhere. We are going to store them in a MongoDB database.
 You can either use your existing MongoDB instance or get one by using the [docker-compose.yml](./messages_download/docker-compose.yml) file.
 
-[!IMPORTANT]  
-Don't forget to set the required environment variables in the [.env](./messages_download/src/.env) file.  
-You will need the ID of the channel you want to export the messages from.  
-You can get it by right-clicking on the channel and selecting "Copy ID" in Discord (you will need to enable Developer Mode in the settings).
+> [!IMPORTANT]  
+>Don't forget to set the required environment variables in the [.env](./messages_download/src/.env) file.  
+>You will need the ID of the channel you want to export the messages from.  
+>You can get it by right-clicking on the channel and selecting "Copy ID" in Discord (you will need to enable Developer Mode in the settings).
 
 ### Using Docker
 
@@ -54,8 +54,8 @@ $ docker run msg_dl_img
     <summary>Click to expand</summary>
 Run the following command to start the export process:
 
-[!WARNING]  
-Note that you will need to have a MongoDB instance running and npm installed.
+> [!WARNING]  
+> Note that you will need to have a MongoDB instance running and npm installed.
 
 ```console
 $ cd messages_download
