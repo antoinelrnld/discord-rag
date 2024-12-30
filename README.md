@@ -39,7 +39,7 @@ Run the following command to start the export process:
 First we start the MongoDB instance if needed:
 ```console
 $ cd msg_export
-$ docker-compose up
+$ docker-compose up mongo
 ```
 
 Then we start the export process:
