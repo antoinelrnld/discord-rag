@@ -60,7 +60,7 @@ $ npm start
 ```
 </details>
 
-> [!INFO]
+> [!NOTE]  
 > The extraction process can take a while depending on the number of messages in the channel.  
 > You can keep track of the progress by checking the logs.  
 > If the process is interrupted, you can restart it and it will continue from where it left off.
