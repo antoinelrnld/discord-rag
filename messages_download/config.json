@@ -1,0 +1,9 @@
+{
+    "token": "",
+    "channelId": "",
+    "mongodb": {
+        "url": "",
+        "db": "",
+        "collection": ""
+    }
+}
