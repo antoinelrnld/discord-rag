@@ -18,10 +18,9 @@ To get started, you will need to get through the following steps:
 ## 1. Prerequisites
 
 - A [Discord Bot Token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#your-bot-s-token)
-
-### Optional
 - [Docker](https://www.docker.com/) (Recommended)
 - [Docker Compose](https://docs.docker.com/compose/) (Recommended)
+- [Node.js](https://nodejs.org/en/) (If you don't want to use Docker)
 
 ## 2. Export your existing Discord messages
 
