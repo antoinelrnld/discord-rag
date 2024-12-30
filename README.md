@@ -1,6 +1,6 @@
 # Discord-RAG
 
-Easilly create a RAG based on your Discord messages.
+Easily create a RAG based on your Discord messages.
 
 ## Introduction
 
@@ -17,7 +17,7 @@ To get started, you will need to get through the following steps:
 
 ## 1. Prerequisites
 
-- a [Discord Bot Token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#your-bot-s-token)
+- A [Discord Bot Token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#your-bot-s-token)
 
 ### Optional
 - [Docker](https://www.docker.com/) (Recommended)
@@ -53,9 +53,6 @@ $ docker run msg_dl_img
 <details>
     <summary>Click to expand</summary>
 Run the following command to start the export process:
-
-> [!WARNING]  
-> Note that you will need to have a MongoDB instance running and npm installed.
 
 ```console
 $ cd messages_download
