@@ -5,6 +5,6 @@
     "mongodb": "6.12.0"
   },
   "scripts": {
-    "start": "node download.js"
+    "start": "node export.js"
   }
 }

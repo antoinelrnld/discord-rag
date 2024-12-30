@@ -38,14 +38,14 @@ Run the following command to start the export process:
 
 First we start the MongoDB instance if needed:
 ```console
-$ cd msg_export
 $ docker-compose up mongo -d
 ```
 
 Then we start the export process:
 ```console
-$ docker build -t msg_dl_img .
-$ docker run msg_dl_img
+$ cd msg_export
+$ docker build -t msg_export_img .
+$ docker run msg_export_img
 ```
 
 ### Using npm
@@ -63,7 +63,7 @@ $ npm start
 > [!NOTE]  
 > The extraction process can take a while depending on the number of messages in the channel.  
 > You can keep track of the progress by checking the logs.  
-> If the process is interrupted, you can restart it and it will continue from where it left off.
+> If the process is interrupted, you can restart it and it will continue from where it left off.  
 > Once the process is done, you can move on to the next step.
 
 ## TODO
