@@ -25,7 +25,7 @@ To get started, you will need to get through the following steps:
 ## 2. Export your existing Discord messages
 
 First, you will need to export the messages from your Discord server to store them elsewhere. We are going to store them in a MongoDB database.
-You can either use your existing MongoDB instance or get one by using the [docker-compose.yml](./msg_export/docker-compose.yml) file.
+You can either use your existing MongoDB instance or get one by using the [docker-compose.yml](./docker-compose.yml) file.
 
 > [!IMPORTANT]  
 >Don't forget to set the required environment variables in the [.env](./msg_export/src/.env) file.  

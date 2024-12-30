@@ -1,7 +1,7 @@
 services:
   mongo:
     image: mongo:8.0.4
-    container_name: mongo
+    container_name: discord_rag_mongo
     ports:
       - "27017:27017"
     volumes: 
@@ -9,3 +9,4 @@ services:
 
 volumes:
   mongo_data:
+    name: discord_rag_mongo_data
