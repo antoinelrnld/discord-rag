@@ -43,8 +43,7 @@ $ docker-compose up mongo -d
 Then we start the export process:
 ```console
 $ cd initial_ingestion
-$ docker build -t initial_ingestion_img .
-$ docker run initial_ingestion_img
+$ docker-compose run initial_ingestion
 ```
 
 ### Using npm
