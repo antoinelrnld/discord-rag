@@ -20,7 +20,11 @@ To get started, you will need to get through the following steps:
 - An [OpenAI API Key](https://platform.openai.com/settings/)
 - [Docker](https://www.docker.com/) (Recommended)
 - [Docker Compose](https://docs.docker.com/compose/) (Recommended)
-- [Node.js](https://nodejs.org/en/) (If you don't want to use Docker)
+
+If you don't want to use Docker, you will need the following:
+- [Node.js](https://nodejs.org/en/)
+- [Python3.10](https://www.python.org/downloads/)
+- [Poetry](https://python-poetry.org/)
 
 ## 2. Initial Data Ingestion
 
@@ -77,6 +81,23 @@ Now that we have the messages stored in the database, we can start the indexing 
 ### Using Docker
 
 ```
+$ docker-compose up mongo redis -d # Make sure the MongoDB and Redis instances are running
 $ cd production/indexing_pipeline
 $ docker-compose run indexing_pipeline
 ```
+
+### Using Poetry
+
+<details>
+    <summary>Click to expand</summary>
+
+```console
+$ cd production/indexing_pipeline
+$ poetry install
+$ poetry run python -m indexing_pipeline
+```
+</details>
+
+> [!NOTE]
+> The indexing process should be relatively fast.
+> Once it's done, you can move on to the next step.
