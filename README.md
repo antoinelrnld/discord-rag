@@ -71,7 +71,7 @@ $ npm start
 Now that we have the messages stored in the database, we can start the indexing pipeline. This will create the necessary indexes and embeddings for the messages to be used by the model. We are using a [SemanticChunking](https://github.com/FullStackRetrieval-com/RetrievalTutorials/blob/a4570f3c4883eb9b835b0ee18990e62298f518ef/tutorials/LevelsOfTextSplitting/5_Levels_Of_Text_Splitting.ipynb) strategy to split the messages into chunks. This allows us to group consecutive messages of the same topic together and to have a better representation of the context. At least that's the idea.
 
 > [!IMPORTANT]
-> Don't forget to set the required environment variables in the [.env](./indexing_pipeline/src/.env) file.  
+> Don't forget to set the required environment variables in the [.env](./production/indexing_pipeline/.env) file.  
 > You can let the default values if you want but you will need to set the `OPENAI_API_KEY`.
 
 ### Using Docker
