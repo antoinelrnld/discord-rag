@@ -9,7 +9,7 @@ To get started, you will need to get through the following steps:
 
 1. [Prerequisites](#prerequisites)
 2. [Export your Discord messages](#export-your-discord-messages)
-3. [To do](#todo)
+3. [Run the Indexing Pipeline](#todo)
 
 > [!WARNING]  
 > Keep in mind that the project is in its early stages and is only a prototype for now.
@@ -17,6 +17,7 @@ To get started, you will need to get through the following steps:
 ## 1. Prerequisites
 
 - A [Discord Bot Token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#your-bot-s-token)
+- An [OpenAI API Key](https://platform.openai.com/settings/)
 - [Docker](https://www.docker.com/) (Recommended)
 - [Docker Compose](https://docs.docker.com/compose/) (Recommended)
 - [Node.js](https://nodejs.org/en/) (If you don't want to use Docker)
@@ -63,4 +64,19 @@ $ npm start
 > If the process is interrupted, you can restart it and it will continue from where it left off.  
 > Once the process is done, you can move on to the next step.
 
-## TODO
+## 3. Run the Indexing Pipeline
+
+![](./docs/img/indexing-pipeline.png)
+
+Now that we have the messages stored in the database, we can start the indexing pipeline. This will create the necessary indexes and embeddings for the messages to be used by the model.
+
+> [!IMPORTANT]
+> Don't forget to set the required environment variables in the [.env](./indexing_pipeline/src/.env) file.
+> You can let the default values if you want but you will need to set the `OPENAI_API_KEY`.
+
+### Using Docker
+
+```
+$ cd production/indexing_pipeline
+$ docker-compose run indexing_pipeline
+```
