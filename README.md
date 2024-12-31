@@ -21,7 +21,9 @@ To get started, you will need to get through the following steps:
 - [Docker Compose](https://docs.docker.com/compose/) (Recommended)
 - [Node.js](https://nodejs.org/en/) (If you don't want to use Docker)
 
-## 2. Export your existing Discord messages
+## 2. Initial Data Ingestion
+
+![](./docs/img/initial-data-ingestion.png)
 
 First, you will need to export the messages from your Discord server to store them elsewhere. We are going to store them in a MongoDB database.
 You can either use your existing MongoDB instance or get one by using the [docker-compose.yml](./docker-compose.yml) file.
@@ -32,8 +34,6 @@ You can either use your existing MongoDB instance or get one by using the [docke
 > You can get it by right-clicking on the channel and selecting "Copy ID" in Discord (you will need to enable Developer Mode in the settings).
 
 ### Using Docker
-
-Run the following command to start the export process:
 
 First we start the MongoDB instance if needed:
 ```console
@@ -50,7 +50,6 @@ $ docker run msg_export_img
 ### Using npm
 <details>
     <summary>Click to expand</summary>
-Run the following command to start the export process:
 
 ```console
 $ cd msg_export
