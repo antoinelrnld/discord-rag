@@ -99,5 +99,5 @@ $ poetry run python -m indexing_pipeline
 </details>
 
 > [!NOTE]
-> The indexing process should be relatively fast.
+> The indexing process should be relatively fast.  
 > Once it's done, you can move on to the next step.
