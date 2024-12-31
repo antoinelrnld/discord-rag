@@ -1,10 +1,9 @@
 # Discord-RAG
 
-Easily create a RAG based on your Discord messages.
-
-## Introduction
-
 This repo aims to provide a simple and fast way to create a RAG (Retrieval-Augmented Generation) based on your Discord messages. This allows you to use an LLM that is aware of the context of your messages and can generate responses based on that. The repo also provides code to create a Discord bot that can be used to interact with the model directly in your Discord server. Ask for old informations that were discussed long ago, make summaries, ask questions about you and your friends, have fun with the bot!
+
+Here is a high-level overview of the architecture we are going to build:
+![](./docs/img/discord-rag-architecture.png)
 
 To get started, you will need to get through the following steps:
 
