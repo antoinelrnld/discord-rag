@@ -30,7 +30,7 @@ You can either use your existing MongoDB instance or get one by using the [docke
 
 > [!IMPORTANT]  
 > Don't forget to set the required environment variables in the [.env](./initial_ingestion/src/.env) file.  
-> You will need the ID of the channel you want to export the messages from.  
+> You will need the IDs of the channels you want to export the messages from. (Comma-separated)  
 > You can get it by right-clicking on the channel and selecting "Copy ID" in Discord (you will need to enable Developer Mode in the settings).
 
 ### Using Docker

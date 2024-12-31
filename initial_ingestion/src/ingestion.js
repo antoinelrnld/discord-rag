@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const { token, channelId, mongodb } = require('./config.js');
+const { token, channelIds, mongodb } = require('./config.js');
 const { Client, GatewayIntentBits } = require('discord.js');
 
 const MAX_FETCH_LIMIT = 100;
@@ -18,35 +18,34 @@ const collection = database.collection(mongodb.collection);
 
 const fetchAndStoreMessages = async (channelId) => {
     try {
+        await mongoClient.connect();
+
         const channel = await client.channels.fetch(channelId);
-        let latestStoredMessageId = await getLatestStoredMessageId();
+        let latestStoredMessageId = await getLatestStoredMessageId(channelId);
         let messagesCollection = null;
         let messagesProcessed = 0;
-
-        await mongoClient.connect();
         
+        console.info(`Starting export of messages from channel ${channelId}`);
         do {
             messagesCollection = await fetchMessages(channel, latestStoredMessageId);
             if (messagesCollection && messagesCollection.size > 0) {
                 const messages = convertMessagesToObjects(messagesCollection.values());
-                const sortedMessages = messages.sort((a, b) => a.timestamp - b.timestamp);
-                await storeMessages(sortedMessages);
-                latestStoredMessageId = sortedMessages[sortedMessages.length - 1]._id;
+                await storeMessages(messages);
+                latestStoredMessageId = max(messages.map(message => message._id));
                 console.info(`Messages processed: ${messagesProcessed += messages.length}`);
             }
         } while (messagesCollection.size === MAX_FETCH_LIMIT);
-        console.info(`Successfully exported ${messagesProcessed} messages.`);
+        console.info(`Successfully exported ${messagesProcessed} messages. Last stored message id: ${latestStoredMessageId}`);
     } catch (error) {
         console.error(error);
     } finally {
         await mongoClient.close();
-        await client.destroy();
     }
 }
 
-const getLatestStoredMessageId = async () => {
+const getLatestStoredMessageId = async (channelId) => {
     try {
-        const latestMessage = await collection.find().sort({ timestamp: -1 }).limit(1).toArray();
+        const latestMessage = await collection.find({ 'channel.id': channelId }).sort({ timestamp: -1 }).limit(1).toArray();
         return latestMessage.length ? latestMessage[0]._id : 0;
     } catch (error) {
         console.error('Error while attempting to get latest stored message id:', error);
@@ -97,6 +96,9 @@ const storeMessages = async (messages) => {
 
 }
 
-client.once('ready', () => fetchAndStoreMessages(channelId));
+client.once('ready', async () => {
+    for (const channelId of channelIds) await fetchAndStoreMessages(channelId);
+    await client.destroy();
+});
 
 client.login(token);
