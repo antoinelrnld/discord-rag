@@ -4,7 +4,7 @@ dotenv.config();
 
 module.exports = {
     token: process.env.DISCORD_BOT_TOKEN,
-    channelIds: process.env.DISCORD_CHANNEL_ID.split(','),
+    channelIds: process.env.DISCORD_CHANNEL_IDS.split(','),
     mongodb: {
         url: process.env.MONGODB_URL,
         db: process.env.MONGODB_DB,
