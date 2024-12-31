@@ -29,7 +29,7 @@ First, you will need to export the messages from your Discord server to store th
 You can either use your existing MongoDB instance or get one by using the [docker-compose.yml](./docker-compose.yml) file.
 
 > [!IMPORTANT]  
-> Don't forget to set the required environment variables in the [.env](./msg_export/src/.env) file.  
+> Don't forget to set the required environment variables in the [.env](./initial_ingestion/src/.env) file.  
 > You will need the ID of the channel you want to export the messages from.  
 > You can get it by right-clicking on the channel and selecting "Copy ID" in Discord (you will need to enable Developer Mode in the settings).
 
@@ -42,9 +42,9 @@ $ docker-compose up mongo -d
 
 Then we start the export process:
 ```console
-$ cd msg_export
-$ docker build -t msg_export_img .
-$ docker run msg_export_img
+$ cd initial_ingestion
+$ docker build -t initial_ingestiont_img .
+$ docker run initial_ingestion_img
 ```
 
 ### Using npm
@@ -52,7 +52,7 @@ $ docker run msg_export_img
     <summary>Click to expand</summary>
 
 ```console
-$ cd msg_export
+$ cd initial_ingestion
 $ npm install
 $ npm start
 ```
