@@ -7,7 +7,7 @@ document_loader = CustomMongodbLoader(
     connection_string=os.getenv("MONGODB_URL"),
     db_name=os.getenv("MONGODB_DB"),
     collection_name=os.getenv("MONGODB_COLLECTION"),
-    field_names=["name", "content"]
+    field_names=["author.username", "content"]
 )
 
 def ingest_documents() -> list[Document]:
