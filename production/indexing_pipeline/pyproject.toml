@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "indexing-pipeline"
+version = "0.1.0"
+description = "Indexing pipeline for the Discord-RAG project"
+authors = ["antoinelrnld <38052726+antoinelrnld@users.noreply.github.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+utils = { path = "../packages/utils/" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
