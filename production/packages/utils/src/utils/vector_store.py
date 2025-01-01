@@ -17,3 +17,6 @@ vector_store = RedisVectorStore(
 
 def index_documents_to_redis(documents: list[str]):
     vector_store.add_documents(documents)
+
+def get_vector_store():
+    return vector_store

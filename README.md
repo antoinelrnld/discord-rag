@@ -9,7 +9,8 @@ To get started, you will need to get through the following steps:
 
 1. [Prerequisites](#prerequisites)
 2. [Export your Discord messages](#export-your-discord-messages)
-3. [Run the Indexing Pipeline](#todo)
+3. [Run the Indexing Pipeline](#run-the-indexing-pipeline)
+4. [Launch the API](#launch-the-api)
 
 > [!WARNING]  
 > Keep in mind that the project is in its early stages and is only a prototype for now.
@@ -101,3 +102,59 @@ $ poetry run python -m indexing_pipeline
 > [!NOTE]
 > The indexing process should be relatively fast.  
 > Once it's done, you can move on to the next step.
+
+## 4. Launch the API
+
+![](./docs/img/api.png)
+
+We are now ready to launch the API that will allow us to interact with the model. The API receives a prompt from the user, retrieves the most relevant messages from the vector store, includes them in the prompt, and sends it to the model. The model then generates a response based on the context provided.  
+
+> [!IMPORTANT]  
+> Don't forget to set the required environment variables in the [.env](./production/api/.env) file.  
+> You can let the default values if you want but you will need to set the `OPENAI_API_KEY`.
+
+### Using Docker
+
+```console
+$ docker-compose up api -d
+```
+
+### Using Poetry
+
+<details>
+    <summary>Click to expand</summary>
+
+```console
+$ cd production/api
+$ poetry install
+$ poetry run python -m api
+```
+</details>
+
+### Using the API
+
+The API provides two endpoints:
+
+| Method | Endpoint | Description | Parameters |
+|--------|----------|-------------|------------|
+| GET | /health | Check if the API is running | |
+| POST | /infer | Generate a response based on the prompt | `text` (Multipart-FormData) |
+
+
+- `/infer` will return a JSON response with the generated text.
+    ```json
+    {
+        "question": "Tell me what you know about the time we went to the beach last summer.",
+        "context": [...],
+        "answer": "When you went to the beach last summer, it was a sunny day and you had a lot of fun. You played volleyball and swam in the sea. You also had a picnic and watched the sunset. It was a great day!"
+    }
+    ```
+- `/health` will return a JSON response with the status of the API.
+    ```json
+    {
+        "status": "ok"
+    }
+    ```
+
+> [!TIP]  
+At this point the RAG application is ready to be used. Feel free to integrate it in any application. If you want to interact with the model directly in your Discord server, we provide the code of a Discord bot that you can use in the next section.

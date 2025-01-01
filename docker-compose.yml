@@ -19,6 +19,20 @@ services:
     networks:
       - discord_rag_network
 
+  api:
+    build:
+      context: production/
+      dockerfile: ./api/Dockerfile
+    env_file:
+      - production/api/.env
+    container_name: discord_rag_api
+    ports:
+      - "8000:8000"
+    networks:
+      - discord_rag_network
+    depends_on:
+      - redis
+
 volumes:
   mongo_data:
     name: discord_rag_mongo_data
