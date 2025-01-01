@@ -11,6 +11,7 @@ To get started, you will need to get through the following steps:
 2. [Export your Discord messages](#export-your-discord-messages)
 3. [Run the Indexing Pipeline](#run-the-indexing-pipeline)
 4. [Launch the API](#launch-the-api)
+5. [Discord Bot](#discord-bot)
 
 > [!WARNING]  
 > Keep in mind that the project is in its early stages and is only a prototype for now.
@@ -158,3 +159,47 @@ The API provides two endpoints:
 
 > [!TIP]  
 At this point the RAG application is ready to be used. Feel free to integrate it in any application. If you want to interact with the model directly in your Discord server, we provide the code of a Discord bot that you can use in the next section.
+
+## 5. Discord Bot
+
+> [!CAUTION]  
+> The real-time data ingestion is not implemented yet.
+
+![](./docs/img/bot.png)
+
+The Discord bot allows you to chat with the model directly in your Discord server. This way, everyone in your server can easily use the RAG application seamlessly. To interact with the bot, use the `/ask` command followed by the question you want to ask. The bot will then generate a response based on the context of the messages it has seen.
+
+> [!IMPORTANT]  
+> Don't forget to set the required environment variables in the [.env](./bot/src/.env) file.  
+> You will need the `DISCORD_BOT_TOKEN` and the `DISCORD_BOT_CLIENT_ID`.  
+> You can find the CLIENT_ID of your bot in the [Discord Developer Portal](https://discord.com/developers/applications) (Named "Application ID").
+
+### Using Docker
+
+```console
+$ docker-compose up bot -d
+```
+
+### Using npm
+
+<details>
+    <summary>Click to expand</summary>
+
+```console
+$ cd bot
+$ npm install
+$ npm start
+```
+</details>
+
+## Et Voilà!
+
+![](./docs/img/discord-rag-architecture.png)
+
+We built a simple RAG application for Discord! Feel free to contribute to the repo and suggest improvements. For now it is still a proof of concept, there is a lot of room for improvement.  
+
+Once you went through all the steps at least once, you can start the whole application with a single command:
+
+```console
+$ docker-compose up -d
+```

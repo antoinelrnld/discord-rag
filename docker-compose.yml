@@ -33,6 +33,18 @@ services:
     depends_on:
       - redis
 
+  bot:
+    build:
+      context: bot/
+      dockerfile: ./Dockerfile
+    env_file:
+      - bot/src/.env
+    container_name: discord_rag_bot
+    networks:
+      - discord_rag_network
+    depends_on:
+      - api
+
 volumes:
   mongo_data:
     name: discord_rag_mongo_data
