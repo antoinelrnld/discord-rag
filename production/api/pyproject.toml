@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "api"
+version = "0.1.0"
+description = "API for the Discord-RAG project"
+authors = ["antoinelrnld <38052726+antoinelrnld@users.noreply.github.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langchain-core = "0.3.28"
+langchain-openai = "0.2.14"
+langgraph = "0.2.60"
+fastapi = "0.115.6"
+uvicorn = "0.34.0"
+python-multipart = "0.0.20"
+utils = { path = "../packages/utils/" }
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
