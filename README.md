@@ -80,7 +80,7 @@ Now that we have the messages stored in the database, we can start the indexing 
 
 ### Using Docker
 
-```
+```console
 $ docker-compose up mongo redis -d # Make sure the MongoDB and Redis instances are running
 $ cd production/indexing_pipeline
 $ docker-compose run indexing_pipeline
