@@ -31,8 +31,9 @@ const fetchAndStoreMessages = async (channelId) => {
             if (messagesCollection && messagesCollection.size > 0) {
                 const messages = convertMessagesToObjects(messagesCollection.values());
                 await storeMessages(messages);
-                latestStoredMessageId = max(messages.map(message => message._id));
-                console.info(`Messages processed: ${messagesProcessed += messages.length}`);
+                latestStoredMessageId = messages.reduce((acc, message) => message.timestamp > acc.timestamp ? message : acc)._id;
+                messagesProcessed += messages.length;
+                console.info(`Messages processed: ${messagesProcessed}`);
             }
         } while (messagesCollection.size === MAX_FETCH_LIMIT);
         console.info(`Successfully exported ${messagesProcessed} messages. Last stored message id: ${latestStoredMessageId}`);
