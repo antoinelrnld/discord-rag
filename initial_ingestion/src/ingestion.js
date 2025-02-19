@@ -29,7 +29,8 @@ const fetchAndStoreMessages = async (channelId) => {
         do {
             messagesCollection = await fetchMessages(channel, latestStoredMessageId);
             if (messagesCollection && messagesCollection.size > 0) {
-                const messages = convertMessagesToObjects(messagesCollection.values());
+                const filteredMessages = filter_out_bot_messages(messagesCollection.values())
+                const messages = convertMessagesToObjects(filteredMessages);
                 await storeMessages(messages);
                 latestStoredMessageId = messages.reduce((acc, message) => message.timestamp > acc.timestamp ? message : acc)._id;
                 messagesProcessed += messages.length;
@@ -67,8 +68,12 @@ const fetchMessages = async (channel, latestStoredMessageId) => {
     }
 }
 
+const filter_out_bot_messages = (messages) => {
+    return Array.from(messages).filter(message => message.author.id != client.user.id)
+}
+
 const convertMessagesToObjects = (messages) => {
-    return Array.from(messages).map(message => ({
+    return messages.map(message => ({
             _id: message.id,
             content: message.content,
             timestamp: message.createdTimestamp,
