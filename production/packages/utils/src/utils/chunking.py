@@ -5,7 +5,8 @@ from langchain_openai import OpenAIEmbeddings
 chunker = SemanticChunker(
     embeddings=OpenAIEmbeddings(
         model="text-embedding-3-large"
-    )
+    ),
+    sentence_split_regex=r"<MESSAGE_SEP>"
 )
 
 def chunk_documents(documents: list[Document]) -> list[Document]:

@@ -10,7 +10,7 @@ def add_separator_between_author_and_text(documents: list[Document]) -> list[Doc
 
 def merge_documents_into_groups_of_size_n(documents: list[Document], n: int = 50) -> list[Document]:
     return [
-        Document("\n".join(document.page_content for document in documents[i:i+n]))
+        Document("\n<MESSAGE_SEP>".join(document.page_content for document in documents[i:i+n]))
         for i in range(0, len(documents), n)
     ]
 
