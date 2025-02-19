@@ -15,7 +15,7 @@ class CustomMongodbLoader(MongodbLoader):
 
         projection = self._construct_projection()
 
-        async for doc in self.collection.find(self.filter_criteria, projection).sort([("timestamp", 1), ("channel.id", 1)]):
+        async for doc in self.collection.find(self.filter_criteria, projection).sort([("channel.id", 1), ("timestamp", 1)]):
             metadata = self._extract_fields(doc, self.metadata_names, default="")
 
             # Optionally add database and collection names to metadata
