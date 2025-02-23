@@ -1,4 +1,5 @@
 from langchain_redis import RedisConfig, RedisVectorStore
+from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 import os
 
@@ -15,7 +16,7 @@ vector_store = RedisVectorStore(
     config=redis_config
 )
 
-def index_documents_to_redis(documents: list[str]):
+def index_documents_to_redis(documents: list[Document]):
     vector_store.add_documents(documents)
 
 def get_vector_store():

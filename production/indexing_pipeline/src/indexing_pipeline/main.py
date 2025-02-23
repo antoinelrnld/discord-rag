@@ -22,14 +22,14 @@ def main():
 
     logger.info("Preprocessing documents.")    
     preprocessed_documents = preprocess_documents(documents)
-    logger.info("Preprocessing complete.")
+    logger.info(f"Preprocessing complete. {len(preprocessed_documents)} documents left.")
     
     logger.info("Chunking documents.")
-    chunked_documents = chunk_documents(preprocessed_documents)
-    logger.info("Chunking complete.")
+    chunks = chunk_documents(preprocessed_documents)
+    logger.info(f"Chunking complete. {len(chunks)} chunks.")
 
     logger.info("Indexing documents to Redis.")
-    index_documents_to_redis(chunked_documents)
+    index_documents_to_redis(chunks)
     logger.info("Indexing complete.")
 
 if __name__ == "__main__":
