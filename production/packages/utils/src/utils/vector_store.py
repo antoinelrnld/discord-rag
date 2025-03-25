@@ -6,7 +6,11 @@ import os
 
 redis_config = RedisConfig(
     index_name="discord_rag_semantic_index",
-    redis_url=os.getenv("REDIS_URL")
+    redis_url=os.getenv("REDIS_URL"),
+    metadata_schema=[
+        {"name": "timestamp", "type": "numeric"},
+        {"name": "url", "type": "text"}
+    ]
 )
 
 vector_store = RedisVectorStore(
