@@ -4,6 +4,8 @@ from utils.chunking import chunk_documents
 from utils.vector_store import index_documents_to_redis
 import logging
 
+from tqdm import tqdm
+
 logging.basicConfig(level=logging.WARNING, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -25,7 +27,7 @@ def main():
     logger.info(f"Preprocessing complete. {len(preprocessed_documents)} documents left.")
     
     logger.info("Chunking documents.")
-    chunks = chunk_documents(preprocessed_documents)
+    chunks = [chunk for doc in tqdm(preprocessed_documents) for chunk in chunk_documents([doc])]
     logger.info(f"Chunking complete. {len(chunks)} chunks.")
 
     logger.info("Indexing documents to Redis.")
