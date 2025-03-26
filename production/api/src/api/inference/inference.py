@@ -14,11 +14,12 @@ class Inferencer:
         self.graph = self.create_graph()
 
     def retrieve(self, state: State):
-        retrieved_docs = self.vector_store.similarity_search(state["question"], k=25)
+        retrieved_docs = self.vector_store.similarity_search(state["question"], k=6)
         return {"context": retrieved_docs}
 
     def generate(self, state: State):
-        docs_content = "\n\n".join(doc.page_content for doc in state["context"])
+        sorted_context = sorted(state["context"], key=lambda x: x.metadata["timestamp"])
+        docs_content = "\n\n".join(doc.page_content for doc in sorted_context)
         messages = self.prompt.invoke({"question": state["question"], "context": docs_content})
         response = self.llm.invoke(messages)
         return {"answer": response.content}

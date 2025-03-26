@@ -6,7 +6,8 @@ chunker = SemanticChunker(
     embeddings=OpenAIEmbeddings(
         model="text-embedding-3-large"
     ),
-    sentence_split_regex=r"<MESSAGE_SEP>"
+    sentence_split_regex=r"<MESSAGE_SEP>",
+    add_start_index=False
 )
 
 def chunk_documents(documents: list[Document]) -> list[Document]:
