@@ -15,7 +15,8 @@ redis_config = RedisConfig(
 
 vector_store = RedisVectorStore(
     embeddings=OpenAIEmbeddings(
-        model="text-embedding-3-large"
+        model="text-embedding-3-large",
+        chunk_size=50
     ),
     config=redis_config
 )

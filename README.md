@@ -70,7 +70,7 @@ docker-compose run indexing_pipeline
 ```
 
 > [!NOTE]
-> The indexing process should be relatively fast.  
+> The indexing process can be relatively slow because of the Semantic Chunking strategy.  
 > Once it's done, you can move on to the next step.
 
 ## 4. Launch the API
