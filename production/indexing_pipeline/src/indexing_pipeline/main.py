@@ -10,6 +10,8 @@ logging.basicConfig(level=logging.WARNING, format="%(asctime)s - %(name)s - %(le
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+BATCH_SIZE = 10
+
 def main():
     logger.info("Starting indexing pipeline.")
 
@@ -26,13 +28,28 @@ def main():
     preprocessed_documents = preprocess_documents(documents)
     logger.info(f"Preprocessing complete. {len(preprocessed_documents)} documents left.")
     
-    logger.info("Chunking documents.")
-    chunks = [chunk for doc in tqdm(preprocessed_documents) for chunk in chunk_documents([doc])]
-    logger.info(f"Chunking complete. {len(chunks)} chunks.")
+    n_err = 0
+    for i in tqdm(range(0, len(preprocessed_documents), BATCH_SIZE), desc="Chunking and indexing documents."):
+        current_documents = preprocessed_documents[i:i+BATCH_SIZE]
+        try:
+            logger.info('Chunking batch of documents')
+            chunks = chunk_documents(current_documents)
+            logger.info('Batch successfully chunked')
+        except Exception:
+            n_err += 1
+            logger.exception(f'Error during chunking of documents : {current_documents}')
+            continue
 
-    logger.info("Indexing documents to Redis.")
-    index_documents_to_redis(chunks)
-    logger.info("Indexing complete.")
+        try:
+            logger.info('Indexing chunks in vector store')
+            index_documents_to_redis(chunks)
+            logger.info('Successfully indexed chunks')
+        except Exception:
+            n_err += 1
+            logger.exception(f'Error during indexing of chunks : {chunks}')
+    
+    logger.info(f'Indexing pipeline ended. Number of errors : {n_err}')
+
 
 if __name__ == "__main__":
     main()
