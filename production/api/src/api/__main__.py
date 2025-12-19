@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI, Form
-from inference import Inferencer
+from api.inference import Inferencer
 
 app = FastAPI()
 inferencer = Inferencer()
@@ -14,5 +14,9 @@ async def infer(text: str = Form()):
     return inferencer.infer(text)
 
 
-if __name__ == "__main__":
+def main():
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+if __name__ == "__main__":
+    main()

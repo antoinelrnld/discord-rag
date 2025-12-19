@@ -1,9 +1,9 @@
 import os
 from langchain_openai import ChatOpenAI
-from inference.prompting import get_prompt_template
+from api.inference.prompting import get_prompt_template
 from utils.vector_store import get_vector_store
 from langgraph.graph import START, StateGraph
-from inference import State
+from api.inference import State
 
 
 class Inferencer:

@@ -21,8 +21,8 @@ services:
 
   api:
     build:
-      context: production/
-      dockerfile: ./api/Dockerfile
+      context: .
+      dockerfile: production/api/Dockerfile
     env_file:
       - production/api/.env
     container_name: discord_rag_api
