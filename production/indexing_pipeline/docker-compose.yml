@@ -1,8 +1,8 @@
 services:
   indexing_pipeline:
     build:
-      context: ../
-      dockerfile: ./indexing_pipeline/Dockerfile
+      context: ../../
+      dockerfile: ./production/indexing_pipeline/Dockerfile
     env_file:
       - .env
     container_name: discord_rag_indexing_pipeline

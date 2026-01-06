@@ -1,17 +1,15 @@
 FROM python:3.10-slim-bullseye
 
-WORKDIR /app
+WORKDIR /opt/discord-rag/app
 
-RUN pip install poetry
+RUN pip install --no-cache-dir uv 
 
-COPY indexing_pipeline /app/indexing_pipeline
-COPY packages/utils/ /app/packages/utils
+COPY ./production/indexing_pipeline/pyproject.toml ./production/indexing_pipeline/uv.lock ./
+COPY ./production/indexing_pipeline/src ./src
+COPY ../../packages/utils ../../packages/utils
 
-WORKDIR /app/packages/utils
-RUN poetry build
+RUN uv sync --frozen
 
-WORKDIR /app/indexing_pipeline
-RUN poetry install
+ENV PATH="/opt/discord-rag/app/.venv/bin:$PATH"
 
-# Run the indexing pipeline
-CMD ["poetry", "run", "python", "src/indexing_pipeline/main.py"]
+CMD ["python", "-m", "indexing_pipeline"]
