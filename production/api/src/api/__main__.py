@@ -1,17 +1,20 @@
 import uvicorn
 from fastapi import FastAPI, Form
-from api.inference import Inferencer
+from api.agent import Agent
+
 
 app = FastAPI()
-inferencer = Inferencer()
+agent = Agent()
+
 
 @app.get("/health")
 async def health():
     return {"status": "ok"}
 
-@app.post("/infer")
-async def infer(text: str = Form()):
-    return inferencer.infer(text)
+
+@app.post("/invoke")
+async def invoke(text: str = Form()):
+    return await agent.invoke(text)
 
 
 def main():
