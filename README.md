@@ -31,7 +31,7 @@ First, you will need to export the messages from your Discord server to store th
 You can either use your existing MongoDB instance or get one by using the [docker-compose.yml](./docker-compose.yml) file.
 
 > [!IMPORTANT]  
-> Don't forget to set the required environment variables in the [.env](./initial_ingestion/src/.env) file.  
+> Don't forget to set the required environment variables in the [.env](./production/initial_ingestion/src/.env) file.  
 > You will need the IDs of the channels you want to export the messages from. (Comma-separated)  
 > You can get it by right-clicking on the channel and selecting "Copy ID" in Discord (you will need to enable Developer Mode in the settings).
 
@@ -42,7 +42,7 @@ docker-compose up mongo -d
 
 Then we start the export process:
 ```console
-cd ./initial_ingestion
+cd .production/initial_ingestion
 docker-compose run initial_ingestion
 ```
 
@@ -63,7 +63,7 @@ Now that the messages are stored in the database, we can start the indexing pipe
 > You can let the default values if you want but you will need to set the `OPENAI_API_KEY`.
 
 ```console
-cd ../ # go back to the root directory
+cd ../../ # go back to the root directory
 docker-compose up mongo redis -d # Make sure the MongoDB and Redis instances are running
 cd ./production/indexing_pipeline
 docker-compose run indexing_pipeline

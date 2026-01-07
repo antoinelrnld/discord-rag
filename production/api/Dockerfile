@@ -1,17 +1,15 @@
 FROM python:3.10-slim-bullseye
 
-WORKDIR /app
+WORKDIR /opt/discord-rag/app
 
-RUN pip install poetry
+RUN pip install --no-cache-dir uv 
 
-COPY api /app/api
-COPY packages/utils/ /app/packages/utils
+COPY ./production/api/pyproject.toml ./production/api/uv.lock ./
+COPY ./production/api/src ./src
+COPY ./packages/utils ../../packages/utils
 
-WORKDIR /app/packages/utils
-RUN poetry build
+RUN uv sync --frozen
 
-WORKDIR /app/api
-RUN poetry install
+ENV PATH="/opt/discord-rag/app/.venv/bin:$PATH"
 
-# Run the API
-CMD ["poetry", "run", "python", "src/api/main.py"]
+CMD ["python", "-m", "api"]
