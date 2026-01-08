@@ -1,10 +1,13 @@
 import uvicorn
-from fastapi import FastAPI, Form
-from api.agent import Agent
-
+from fastapi import FastAPI
+from api.dependencies import AgentDependency
+from pydantic import BaseModel
 
 app = FastAPI()
-agent = Agent()
+
+
+class InvokeRequest(BaseModel):
+    text: str
 
 
 @app.get("/health")
@@ -13,8 +16,8 @@ async def health():
 
 
 @app.post("/invoke")
-async def invoke(text: str = Form()):
-    return await agent.invoke(text)
+async def invoke(request: InvokeRequest, agent: AgentDependency):
+    return await agent.invoke(request.text)
 
 
 def main():

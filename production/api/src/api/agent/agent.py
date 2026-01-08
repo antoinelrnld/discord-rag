@@ -1,10 +1,10 @@
-from langchain_core.documents import Document
-from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
-from langgraph.graph import START, StateGraph
 from typing_extensions import List, TypedDict
 
-from utils.vector_store import get_vector_store
+from langchain_core.documents import Document
+from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_core.prompts import PromptTemplate
+from langchain_core.vectorstores import VectorStore
+from langgraph.graph import START, StateGraph
 
 
 TEMPLATE = """Utilise les éléments de contexte suivants pour répondre à la question à la fin.
@@ -27,9 +27,9 @@ class State(TypedDict):
 
 
 class Agent:
-    def __init__(self):
-        self.vector_store = get_vector_store()
-        self.llm = ChatOpenAI(model="gpt-4o-mini")
+    def __init__(self, llm: BaseChatModel, vector_store: VectorStore):
+        self.vector_store = vector_store
+        self.llm = llm
         self.prompt = PromptTemplate.from_template(TEMPLATE)
         self.graph = self.create_graph()
 
