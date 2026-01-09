@@ -12,13 +12,10 @@ dependencies = [
     "fastapi==0.125.0",
     "uvicorn==0.38.0",
     "python-multipart==0.0.21",
-    "utils",
+    "langchain-redis>=0.2.5",
 ]
 
 [tool.uv]
-
-[tool.uv.sources]
-utils = { path = "../../packages/utils/", editable=true }
 
 [project.scripts]
 api = "api.__main__:main"

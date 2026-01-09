@@ -42,7 +42,7 @@ docker-compose up mongo -d
 
 Then we start the export process:
 ```console
-cd .production/initial_ingestion
+cd ./production/initial_ingestion
 docker-compose run initial_ingestion
 ```
 
@@ -95,10 +95,10 @@ The API provides two endpoints:
 | Method | Endpoint | Description | Parameters |
 |--------|----------|-------------|------------|
 | GET | /health | Check if the API is running | |
-| POST | /infer | Generate a response based on the prompt | `text` (Multipart-FormData) |
+| POST | /invoke | Generate a response based on the prompt | `text` (JSON body) |
 
 
-- `/infer` will return a JSON response with the generated text.
+- `/invoke` will return a JSON response with the generated text.
     ```json
     {
         "question": "Tell me what you know about the time we went to the beach last summer.",

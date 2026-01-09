@@ -1,7 +1,7 @@
-from utils.ingestion import ingest_documents
-from utils.preprocessing import preprocess_documents
-from utils.chunking import chunk_documents
-from utils.vector_store import index_documents_to_redis
+from indexing_pipeline.ingestion import ingest_documents
+from indexing_pipeline.preprocessing import preprocess_documents
+from indexing_pipeline.chunking import chunk_documents
+from indexing_pipeline.vector_store import index_documents_to_redis
 import logging
 
 from tqdm import tqdm

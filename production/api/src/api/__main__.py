@@ -1,17 +1,23 @@
 import uvicorn
-from fastapi import FastAPI, Form
-from api.inference import Inferencer
+from fastapi import FastAPI
+from api.dependencies import AgentDependency
+from pydantic import BaseModel
 
 app = FastAPI()
-inferencer = Inferencer()
+
+
+class InvokeRequest(BaseModel):
+    text: str
+
 
 @app.get("/health")
 async def health():
     return {"status": "ok"}
 
-@app.post("/infer")
-async def infer(text: str = Form()):
-    return inferencer.infer(text)
+
+@app.post("/invoke")
+async def invoke(request: InvokeRequest, agent: AgentDependency):
+    return await agent.invoke(request.text)
 
 
 def main():

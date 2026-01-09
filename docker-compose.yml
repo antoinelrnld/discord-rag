@@ -35,10 +35,10 @@ services:
 
   bot:
     build:
-      context: bot/
+      context: ./production/bot/
       dockerfile: ./Dockerfile
     env_file:
-      - production/bot/src/.env
+      - ./production/bot/src/.env
     container_name: discord_rag_bot
     networks:
       - discord_rag_network

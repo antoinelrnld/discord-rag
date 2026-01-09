@@ -1,5 +1,5 @@
 from langchain_core.documents import Document
-from utils import CustomMongodbLoader
+from indexing_pipeline.CustomMongodbLoader import CustomMongodbLoader
 import os
 
 
