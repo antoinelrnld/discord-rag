@@ -5,12 +5,16 @@ description = "Indexing pipeline for the Discord-RAG project"
 authors = [{ name = "antoinelrnld", email = "38052726+antoinelrnld@users.noreply.github.com" }]
 requires-python = ">=3.10,<4"
 license = "MIT"
-dependencies = ["utils"]
+dependencies = [
+    "langchain-experimental==0.4.1",
+    "langchain-community==0.4.1",
+    "langchain-core==1.2.4",
+    "langchain-redis==0.2.5",
+    "langchain-openai==1.1.6",
+    "motor==3.7.1",
+]
 
 [tool.uv]
-
-[tool.uv.sources]
-utils = { path = "../../packages/utils/", editable=true }
 
 [project.scripts]
 indexing-pipeline = "indexing_pipeline.__main__:main"
