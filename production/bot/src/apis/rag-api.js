@@ -1,5 +1,4 @@
 const axios = require('axios');
-const FormData = require('form-data');
 const { rag } = require('../config.js');
 
 const rag_api = axios.create({
@@ -17,13 +16,11 @@ exports.healthCheck = async () => {
 }
 
 exports.inference = async (text) => {
-    const form = new FormData();
-    form.append('text', text);
-    console.log('Sending file to API');
+    const body = { text: text };
+    console.log('Sending prompt to RAG API');
 
     try {
-        const response = await rag_api.post(rag.inference_route, form, {
-            headers: form.getHeaders(),
+        const response = await rag_api.post(rag.inference_route, body, {
             responseType: 'json',
             timeout: 120000,
         });
