@@ -42,7 +42,6 @@ docker-compose up mongo -d
 
 Then we start the export process:
 ```console
-cd ./production/initial_ingestion
 docker-compose run initial_ingestion
 ```
 
@@ -63,9 +62,7 @@ Now that the messages are stored in the database, we can start the indexing pipe
 > You can let the default values if you want but you will need to set the `OPENAI_API_KEY`.
 
 ```console
-cd ../../ # go back to the root directory
 docker-compose up mongo redis -d # Make sure the MongoDB and Redis instances are running
-cd ./production/indexing_pipeline
 docker-compose run indexing_pipeline
 ```
 
@@ -84,7 +81,6 @@ We are now ready to launch the API that will allow us to interact with the model
 > You can let the default values if you want but you will need to set the `OPENAI_API_KEY`.
 
 ```console
-cd ../.. # go back to the root directory
 docker-compose up api -d
 ```
 
@@ -143,5 +139,5 @@ We built a simple RAG application for Discord! Feel free to contribute to the re
 Once you went through all the steps at least once, you can start the whole application with a single command:
 
 ```console
-$ docker-compose up -d
+$ docker-compose up mongo redis api bot -d
 ```
