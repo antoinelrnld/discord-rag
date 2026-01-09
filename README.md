@@ -80,6 +80,12 @@ We are now ready to launch the API that will allow us to interact with the model
 > Don't forget to set the required environment variables in the [.env](./production/api/.env) file.  
 > You can let the default values if you want but you will need to set the `OPENAI_API_KEY`.
 
+You can set the `AGENT_LANGUAGE` variable to change the language of the system prompt that will be given to the LLM. Supported languages are:
+- en (English) (default)
+- fr (French)
+
+Feel free to contribute to the repo and add more languages in the [system_prompt.py](./production/api/src/api/agent/system_prompt.py) file. You can also modify the existing prompts to better suit your needs.
+
 ```console
 docker-compose up api -d
 ```
