@@ -6,6 +6,7 @@ from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.vectorstores import VectorStore
 from langchain_core.embeddings import Embeddings
 from api.agent import Agent
+from api.agent.system_prompt import Language
 
 
 def get_llm() -> BaseChatModel:
@@ -50,7 +51,9 @@ VectorStoreDependency = Annotated[VectorStore, Depends(get_vector_store)]
 
 
 def get_agent(llm: LLMDependency, vector_store: VectorStoreDependency):
-    return Agent(llm, vector_store)
+    agent_language = os.getenv("AGENT_LANGUAGE", "en").lower()
+    language = Language(agent_language)
+    return Agent(llm, vector_store, language)
 
 
 AgentDependency = Annotated[Agent, Depends(get_agent)]
