@@ -45,6 +45,26 @@ services:
     depends_on:
       - api
 
+  initial_ingestion:
+    build:
+      context: .
+      dockerfile: ./production/initial_ingestion/Dockerfile
+    env_file:
+      - ./production/initial_ingestion/src/.env
+    container_name: discord_rag_initial_ingestion
+    networks:
+      - discord_rag_network
+
+  indexing_pipeline:
+    build:
+      context: .
+      dockerfile: ./production/indexing_pipeline/Dockerfile
+    env_file:
+      - ./production/indexing_pipeline/.env
+    container_name: discord_rag_indexing_pipeline
+    networks:
+      - discord_rag_network
+
 volumes:
   mongo_data:
     name: discord_rag_mongo_data
