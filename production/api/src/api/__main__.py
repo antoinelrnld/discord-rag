@@ -2,25 +2,35 @@ import uvicorn
 from fastapi import FastAPI
 from api.dependencies import AgentDependency
 from pydantic import BaseModel
+from typing import Any, Dict
 
-app = FastAPI()
+app: FastAPI = FastAPI()
+
+
+class HealthResponse(BaseModel):
+    status: str
 
 
 class InvokeRequest(BaseModel):
     text: str
 
 
+class InvokeResponse(BaseModel):
+    result: Dict[str, Any]
+
+
 @app.get("/health")
-async def health():
-    return {"status": "ok"}
+async def health() -> HealthResponse:
+    return HealthResponse(status="ok")
 
 
 @app.post("/invoke")
-async def invoke(request: InvokeRequest, agent: AgentDependency):
-    return await agent.invoke(request.text)
+async def invoke(request: InvokeRequest, agent: AgentDependency) -> InvokeResponse:
+    result = await agent.invoke(request.text)
+    return InvokeResponse(result=result)
 
 
-def main():
+def main() -> None:
     uvicorn.run(app, host="0.0.0.0", port=8000)
 
 

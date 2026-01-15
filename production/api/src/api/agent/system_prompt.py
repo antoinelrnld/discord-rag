@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Dict
 
 
 class Language(str, Enum):
@@ -6,7 +7,7 @@ class Language(str, Enum):
     FRENCH = "fr"
 
 
-SYSTEM_PROMPT = {
+SYSTEM_PROMPT: Dict[Language, str] = {
     Language.FRENCH: """Utilise les éléments de contexte suivants pour répondre à la question à la fin.
 Les phrases suivantes sont des messages issus d'une conversation sur Discord.
 Il y a plusieurs intervenants, et les messages du contexte sont dans l'ordre chronologique.
@@ -18,8 +19,6 @@ Contexte : {context}
 Question : {question}
 
 Réponse :""",
-
-
     Language.ENGLISH: """Use the following context to answer the question at the end.
 The following sentences are messages from a conversation on Discord.
 There are multiple participants, and the context messages are in chronological order.
@@ -30,5 +29,5 @@ Context: {context}
 
 Question: {question}
 
-Answer:"""
+Answer:""",
 }
