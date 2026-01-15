@@ -62,7 +62,7 @@ Now that the messages are stored in the database, we can start the indexing pipe
 > You can let the default values if you want but you will need to set the `OPENAI_API_KEY`.
 
 ```console
-docker-compose up mongo redis -d # Make sure the MongoDB and Redis instances are running
+docker-compose up mongo chroma -d # Make sure the MongoDB and ChromaDB instances are running
 docker-compose run indexing_pipeline
 ```
 
@@ -145,5 +145,5 @@ We built a simple RAG application for Discord! Feel free to contribute to the re
 Once you went through all the steps at least once, you can start the whole application with a single command:
 
 ```console
-$ docker-compose up mongo redis api bot -d
+$ docker-compose up mongo chroma api bot -d
 ```

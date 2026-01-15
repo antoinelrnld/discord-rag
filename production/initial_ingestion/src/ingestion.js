@@ -80,7 +80,8 @@ const convertMessagesToObjects = (messages) => {
             url: `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`,
             channel: { id: message.channel.id },
             author: { id: message.author.id, username: message.author.username },
-            guild: { id: message.guild.id }
+            guild: { id: message.guild.id },
+            processed: false
     }));
 }
 
