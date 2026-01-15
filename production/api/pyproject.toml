@@ -12,7 +12,7 @@ dependencies = [
     "fastapi==0.125.0",
     "uvicorn==0.38.0",
     "python-multipart==0.0.21",
-    "langchain-redis>=0.2.5",
+    "langchain-chroma>=1.1.0",
 ]
 
 [tool.uv]

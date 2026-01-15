@@ -29,22 +29,14 @@ EmbeddingsDependency = Annotated[Embeddings, Depends(get_embeddings)]
 
 
 def get_vector_store(embeddings: EmbeddingsDependency) -> VectorStore:
-    from langchain_redis import RedisConfig, RedisVectorStore
+    from langchain_chroma import Chroma
 
-    redis_config = RedisConfig(
-        index_name="discord_rag_semantic_index",
-        redis_url=os.getenv("REDIS_URL"),
-        metadata_schema=[
-            {"name": "timestamp", "type": "numeric"},
-            {"name": "url", "type": "text"}
-        ]
-    
+    return Chroma(
+        collection_name="discord_rag_chroma_collection",
+        embedding_function=embeddings,
+        host=os.getenv("CHROMA_URL", "localhost")
     )
 
-    return RedisVectorStore(
-        embeddings=embeddings,
-        config=redis_config
-    )
 
 
 VectorStoreDependency = Annotated[VectorStore, Depends(get_vector_store)]

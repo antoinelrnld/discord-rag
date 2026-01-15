@@ -8,8 +8,8 @@
       "type": "rectangle",
       "x": 756.5,
       "y": 397,
-      "width": 102,
-      "height": 45,
+      "width": 117.99999999999999,
+      "height": 60,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#ffc9c9",
@@ -25,8 +25,8 @@
         "type": 3
       },
       "seed": 1825623795,
-      "version": 656,
-      "versionNonce": 1076858116,
+      "version": 675,
+      "versionNonce": 652334762,
       "isDeleted": false,
       "boundElements": [
         {
@@ -38,16 +38,16 @@
           "type": "arrow"
         }
       ],
-      "updated": 1735746764179,
+      "updated": 1768436360074,
       "link": null,
       "locked": false
     },
     {
       "id": "nr-6P_4TLvaS2fGqgMg7N",
       "type": "text",
-      "x": 780.2633335749308,
-      "y": 407,
-      "width": 54.47333285013834,
+      "x": 765.625,
+      "y": 414.5,
+      "width": 99.75,
       "height": 25,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -62,20 +62,20 @@
       "index": "a4",
       "roundness": null,
       "seed": 1247836307,
-      "version": 581,
-      "versionNonce": 1955631420,
+      "version": 619,
+      "versionNonce": 310735210,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1735746759704,
+      "updated": 1768436360075,
       "link": null,
       "locked": false,
-      "text": "Redis",
+      "text": "ChromaDB",
       "fontSize": 20,
       "fontFamily": 5,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "JmlKRB4gtrJameGe5koAk",
-      "originalText": "Redis",
+      "originalText": "ChromaDB",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -84,8 +84,8 @@
       "type": "arrow",
       "x": 894.6275126986718,
       "y": 523.8410314010865,
-      "width": 74.70992724280995,
-      "height": 76.84103140108652,
+      "width": 46.575744158896214,
+      "height": 65.74217792457267,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -101,11 +101,11 @@
         "type": 2
       },
       "seed": 1508058003,
-      "version": 482,
-      "versionNonce": 2140502013,
+      "version": 522,
+      "versionNonce": 2048598058,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1735651960427,
+      "updated": 1768437007130,
       "link": null,
       "locked": false,
       "points": [
@@ -114,26 +114,31 @@
           0
         ],
         [
-          -74.70992724280995,
-          -76.84103140108652
+          -46.575744158896214,
+          -65.74217792457267
         ]
       ],
       "lastCommittedPoint": null,
       "startBinding": {
         "elementId": "skeEGiJCCl6HZzU-dDcRj",
-        "focus": -0.09592023642727765,
-        "gap": 1,
-        "fixedPoint": null
+        "mode": "inside",
+        "fixedPoint": [
+          0.2541283730175777,
+          0.014500541398043534
+        ]
       },
       "endBinding": {
         "elementId": "JmlKRB4gtrJameGe5koAk",
-        "focus": 0.19649451115959918,
-        "gap": 5,
-        "fixedPoint": null
+        "mode": "inside",
+        "fixedPoint": [
+          0.7758624452523356,
+          1.0183142246085641
+        ]
       },
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "moveMidPointsWithElement": false
     },
     {
       "id": "2zfzAuXTdE55XaGJ0fOkh",
@@ -177,15 +182,19 @@
       "lastCommittedPoint": null,
       "startBinding": {
         "elementId": "skeEGiJCCl6HZzU-dDcRj",
-        "focus": 0.015583345601446284,
-        "gap": 2.152888638061313,
-        "fixedPoint": null
+        "mode": "orbit",
+        "fixedPoint": [
+          0.5106430970465673,
+          0.4893569029534319
+        ]
       },
       "endBinding": {
         "elementId": "Ic3Ib-V-0lOz3MvqwcZHP",
-        "focus": -0.19188384136507217,
-        "gap": 1,
-        "fixedPoint": null
+        "mode": "inside",
+        "fixedPoint": [
+          0.5016893830773866,
+          0.9920807435274747
+        ]
       },
       "startArrowhead": null,
       "endArrowhead": "arrow",
@@ -642,7 +651,8 @@
     "gridSize": 20,
     "gridStep": 5,
     "gridModeEnabled": false,
-    "viewBackgroundColor": "#ffffff"
+    "viewBackgroundColor": "#ffffff",
+    "lockedMultiSelections": {}
   },
   "files": {}
 }
