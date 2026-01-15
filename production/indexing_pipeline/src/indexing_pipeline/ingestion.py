@@ -12,6 +12,3 @@ document_loader = CustomMongodbLoader(
     include_db_collection_in_metadata=False,
     filter_criteria={"processed": False}
 )
-
-def ingest_documents() -> list[Document]:
-    return document_loader.load()
