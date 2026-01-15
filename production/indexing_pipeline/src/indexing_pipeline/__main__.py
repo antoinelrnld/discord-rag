@@ -19,7 +19,8 @@ def merge_documents(documents):
     merged_content = "\n<MESSAGE_SEP>".join(doc.page_content for doc in documents)
     metadata = {
         'timestamp': documents[0].metadata.get('timestamp'),
-        'url': documents[0].metadata.get('url')
+        'url': documents[0].metadata.get('url'),
+        'final': True if len(documents) == DOCUMENTS_MERGE_SIZE else False
     }
     return Document(page_content=merged_content, metadata=metadata)
 
@@ -47,6 +48,11 @@ async def main():
     """Main entry point for the indexing pipeline."""
     logger.info("Starting indexing pipeline.")
     logger.info("Ingesting documents.")
+    
+    # retrieve documents with final=False from vector store and delete them
+    not_final = vector_store.get(where={"final": False})
+    if len(not_final['documents']) > 0:
+        vector_store.delete(ids=not_final['ids'])
 
     batch = []
     documents = []
