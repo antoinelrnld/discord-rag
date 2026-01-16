@@ -1,8 +1,9 @@
-import uvicorn
-from fastapi import FastAPI
-from api.dependencies import AgentDependency
-from pydantic import BaseModel
 from typing import Any, Dict
+
+import uvicorn
+from api.dependencies import AgentDependency
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 app: FastAPI = FastAPI()
 
