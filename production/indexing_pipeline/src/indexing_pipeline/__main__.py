@@ -2,10 +2,14 @@ import logging
 import os
 from typing import Any, Dict, List
 
-from indexing_pipeline.chunking import chunker
-from indexing_pipeline.ingestion import document_loader
-from indexing_pipeline.vector_store import vector_store
-from langchain_core.documents import Document
+from indexing_pipeline.dependencies import (
+    get_chunker,
+    get_document_loader,
+    get_vector_store,
+)
+from langchain_community.document_loaders.base import BaseLoader
+from langchain_core.documents import BaseDocumentTransformer, Document
+from langchain_core.vectorstores import VectorStore
 from motor.motor_asyncio import (
     AsyncIOMotorClient,
     AsyncIOMotorCollection,
@@ -57,7 +61,9 @@ async def mark_documents_processed(ids: List[str]) -> None:
     await collection.update_many({"_id": {"$in": ids}}, {"$set": {"processed": True}})
 
 
-async def process_batch(batch: List[BatchItem]) -> None:
+async def process_batch(
+    batch: List[BatchItem], vector_store: VectorStore, chunker: BaseDocumentTransformer
+) -> None:
     """Process a batch: split, add to vector store, and mark as processed."""
     if not batch:
         return
@@ -76,7 +82,11 @@ async def process_batch(batch: List[BatchItem]) -> None:
     )
 
 
-async def main() -> None:
+async def main(
+    vector_store: VectorStore,
+    document_loader: BaseLoader,
+    chunker: BaseDocumentTransformer,
+) -> None:
     """Main entry point for the indexing pipeline."""
     logger.info("Starting indexing pipeline.")
     logger.info("Ingesting documents.")
@@ -105,7 +115,7 @@ async def main() -> None:
             )
             documents.clear()
         if len(batch) == BATCH_SIZE:
-            await process_batch(batch)
+            await process_batch(batch, vector_store, chunker)
             batch.clear()
 
     if documents:
@@ -119,11 +129,15 @@ async def main() -> None:
         )
 
     if batch:
-        await process_batch(batch)
+        await process_batch(batch, vector_store, chunker)
         batch.clear()
 
 
 if __name__ == "__main__":
     import asyncio
 
-    asyncio.run(main())
+    document_loader: BaseLoader = get_document_loader()
+    vector_store: VectorStore = get_vector_store()
+    chunker: BaseDocumentTransformer = get_chunker()
+
+    asyncio.run(main(vector_store, document_loader, chunker))
