@@ -24,9 +24,7 @@ def get_embeddings() -> Embeddings:
         openai_embeddings_settings: OpenAIEmbeddingsSettings = (
             settings.embeddings.openai
         )
-        return OpenAIEmbeddings(
-            model=openai_embeddings_settings.model, chunk_size=50
-        )
+        return OpenAIEmbeddings(model=openai_embeddings_settings.model, chunk_size=50)
 
 
 @lru_cache(maxsize=1)
