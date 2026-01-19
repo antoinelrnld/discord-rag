@@ -27,7 +27,7 @@ def get_settings() -> ApiSettings:
 SettingsDependency = Annotated[ApiSettings, Depends(get_settings)]
 
 
-def get_llm(settings: SettingsDependency) -> BaseChatModel:
+def get_llm(settings: SettingsDependency) -> BaseChatModel | None:
     if settings.llm.provider == LLMProvider.OPENAI:
         from langchain_openai import ChatOpenAI
 
@@ -38,7 +38,7 @@ def get_llm(settings: SettingsDependency) -> BaseChatModel:
 LLMDependency = Annotated[BaseChatModel, Depends(get_llm)]
 
 
-def get_embeddings(settings: SettingsDependency) -> Embeddings:
+def get_embeddings(settings: SettingsDependency) -> Embeddings | None:
     if settings.embeddings.provider == EmbeddingsProvider.OPENAI:
         from langchain_openai import OpenAIEmbeddings
 
@@ -53,7 +53,7 @@ EmbeddingsDependency = Annotated[Embeddings, Depends(get_embeddings)]
 
 def get_vector_store(
     settings: SettingsDependency, embeddings: EmbeddingsDependency
-) -> VectorStore:
+) -> VectorStore | None:
     if settings.vector_store.provider == VectorStoreProvider.CHROMADB:
         from langchain_chroma import Chroma
 

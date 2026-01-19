@@ -17,20 +17,18 @@ from langchain_core.vectorstores import VectorStore
 
 
 @lru_cache(maxsize=1)
-def get_embeddings() -> Embeddings:
+def get_embeddings() -> Embeddings | None:
     if settings.embeddings.provider == EmbeddingsProvider.OPENAI:
         from langchain_openai import OpenAIEmbeddings
 
         openai_embeddings_settings: OpenAIEmbeddingsSettings = (
             settings.embeddings.openai
         )
-        return OpenAIEmbeddings(
-            model=openai_embeddings_settings.model, chunk_size=50
-        )
+        return OpenAIEmbeddings(model=openai_embeddings_settings.model, chunk_size=50)
 
 
 @lru_cache(maxsize=1)
-def get_vector_store() -> VectorStore:
+def get_vector_store() -> VectorStore | None:
     embeddings = get_embeddings()
     if settings.vector_store.provider == VectorStoreProvider.CHROMADB:
         from langchain_chroma import Chroma
@@ -44,7 +42,7 @@ def get_vector_store() -> VectorStore:
 
 
 @lru_cache(maxsize=1)
-def get_document_loader() -> BaseLoader:
+def get_document_loader() -> BaseLoader | None:
     if settings.document_loader.provider == DocumentLoaderProvider.MONGODB:
         from indexing_pipeline.CustomMongodbLoader import CustomMongodbLoader
 
@@ -61,7 +59,7 @@ def get_document_loader() -> BaseLoader:
 
 
 @lru_cache(maxsize=1)
-def get_chunker() -> BaseDocumentTransformer:
+def get_chunker() -> BaseDocumentTransformer | None:
     if settings.chunking.strategy == ChunkingStrategy.SEMANTIC:
         from langchain_experimental.text_splitter import SemanticChunker
 
