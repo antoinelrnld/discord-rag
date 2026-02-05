@@ -64,12 +64,28 @@ services:
     container_name: discord_rag_indexing_pipeline
     networks:
       - discord_rag_network
+  
+  vllm:
+    image: vllm/vllm-openai:latest-cu130
+    container_name: discord_rag_vllm
+    env_file:
+      - ./production/vllm/.env
+    ports:
+      - "8080:8000"
+    networks:
+      - discord_rag_network
+    volumes:
+      - vllm_cache:/root/.cache/huggingface
+    gpus: all
+    command: --model Qwen/Qwen3-0.6B --gpu-memory-utilization 0.8 --quantization bitsandbytes
 
 volumes:
   mongo_data:
     name: discord_rag_mongo_data
   chroma_db_data:
     name: discord_rag_chroma_db_data
+  vllm_cache:
+    name: discord_rag_vllm_cache
 
 networks:
   discord_rag_network:
